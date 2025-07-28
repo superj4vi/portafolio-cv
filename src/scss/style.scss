@@ -1,8 +1,9 @@
-@import './header';
-@import './footer';
-@import './about';
-@import './skill';
-@import './portfolio';
-@import './contact';
-@import './form';
-@import './utilities'
+@use 'variables' as *;
+@use 'utilities' as *;
+@use 'header';
+@use 'footer';
+@use 'about';
+@use 'skill';
+@use 'portfolio';
+@use 'contact';
+@use 'form';

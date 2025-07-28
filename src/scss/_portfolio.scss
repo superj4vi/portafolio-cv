@@ -1,7 +1,10 @@
+@use 'variables' as *;
+
 .section {
-  padding:0;
+  padding: 0;
 }
-.portfolio__container{
+
+.portfolio__container {
   width: 100%;
   margin-right: auto ;
   margin-left: auto;
@@ -16,7 +19,7 @@
   display: grid;
   gap:5px
 }
-@media screen and(min-width:768px){
+@media screen and (min-width:768px){
   .portfolio > .portfolio__container{
     grid-template-columns: repeat(2,50%);
     gap: 15px;
@@ -28,7 +31,7 @@
   }
 }
 
-@media screen and(min-width:1024px){
+@media screen and (min-width:1024px){
   .portfolio > .portfolio__container{
     grid-template-columns: repeat(3, 1fr);
     margin-top: auto;
@@ -143,7 +146,7 @@ img{
   color: $color-primary;
 }
 
-@media screen and(min-width:768px){
+@media screen and (min-width:768px){
   .portfolio--modal h3{
     border-bottom: medium solid $color-secundary;
   }
@@ -160,8 +163,9 @@ grid-auto-rows: 2rem;
 .portfolio__modal--info  p{
   font-size: 13px;
 }
-@media screen and(min-width:768px){
-.portfolio__modal--info p{
-  font-size: 20px;
-}
+// Tablet and up styles
+@media screen and (min-width: 768px) {
+  .portfolio__modal--info p {
+    font-size: 20px;
+  }
 }

@@ -1,6 +1,8 @@
-@import './utilities';
-@import './header';
-.contact__form{
+@use 'variables' as *;
+@use 'utilities' as *;
+@use 'header' as *;
+
+.contact__form {
   margin: 2rem auto;
   padding: 1rem;
   max-width: 800px;
@@ -54,10 +56,11 @@ color: $text-color
   opacity: 1;
   pointer-events:auto;
 }
-@media screen and(min-width:1204px){
-  .contact__form{
+// Desktop large screens
+@media screen and (min-width: 1204px) {
+  .contact__form {
     display: grid;
-    grid-template-columns: repeat(2,1fr);
+    grid-template-columns: repeat(2, 1fr);
     column-gap: 1rem;
   }
 .contact__form input,

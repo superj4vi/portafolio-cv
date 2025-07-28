@@ -1,11 +1,12 @@
 
+@use 'variables' as *;
+
 .section__about {
   width: 100%;
-  // height:auto;
   background-color: $color-primary-alt;
   padding-top: 2rem;
   position: relative;
-  z-index:995;
+  z-index: 995;
 }
 .section__about--container{
   width: 100%;
@@ -197,8 +198,9 @@ border-color: $color-secundary;
 
 }
 
-@media screen and (min-width:992px){
-  .about__details--btn:before{
+// Tablet and Desktop styles
+@media screen and (min-width: 992px) {
+  .about__details--btn:before {
     content: "";
     position: absolute;
     z-index: -1;
@@ -210,19 +212,13 @@ border-color: $color-secundary;
     background: $color-secundary;
     transform: scaleX(0);
     transform-origin: 0 20%;
-    transition-property: transform;
-    transition-duration: 0.5s;
-    border-radius: 0px;
-    transition-timing-function: ease-out;
-
+    transition: transform 0.5s ease-out;
+    border-radius: 0;
   }
 }
 
-// }
-/*------------------------------------------------*/
-// ---------------Desktop--------------------------
-/*------------------------------------------------*/
-@media screen and (min-width:992px) {
+// Desktop styles
+@media screen and (min-width: 992px) {
   .about__details {
     display: grid;
     grid-template-columns: repeat(2, 1fr);

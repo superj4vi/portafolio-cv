@@ -1,5 +1,6 @@
-@import './variables';
-.section__skill{
+@use 'variables' as *;
+
+.section__skill {
   width: 100%;
   height: auto 0;
   display: flex;

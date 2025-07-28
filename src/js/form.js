@@ -3,32 +3,99 @@
     $loader = d.querySelector(".contact__form--loader"),
     $response = d.querySelector(".contact__form--response");
 
-  $form.addEventListener("submit", (e) => {
+  // Validación de formulario
+  const validateField = (input) => {
+    const $errorMessage = d.querySelector(`#${input.id}-error`);
+    let isValid = true;
+    let message = "";
+
+    if (!input.value.trim()) {
+      isValid = false;
+      message = "Este campo es obligatorio";
+    } else if (input.pattern && !new RegExp(input.pattern).test(input.value)) {
+      isValid = false;
+      message = input.title || "Formato inválido";
+    }
+
+    if (!isValid) {
+      input.classList.add("invalid");
+      if ($errorMessage) $errorMessage.textContent = message;
+    } else {
+      input.classList.remove("invalid");
+      if ($errorMessage) $errorMessage.textContent = "";
+    }
+
+    return isValid;
+  };
+
+  // Validar campos en tiempo real
+  $form.querySelectorAll("input, textarea").forEach(input => {
+    input.addEventListener("input", () => validateField(input));
+    input.addEventListener("blur", () => validateField(input));
+  });
+
+  // Anti-spam: limitar envíos
+  const SUBMIT_TIMEOUT = 3000; // 3 segundos
+  let lastSubmitTime = 0;
+
+  $form.addEventListener("submit", async (e) => {
     e.preventDefault();
-    $loader.classList.remove("none");
-    fetch("https://formsubmit.co/ajax/aragonjavier017@gmail.com", {
-      method: "POST",
-      body: new FormData(e.target),
-    })
-      .then((res) => (res.ok ? res.json : Promise.reject(res)))
-      .then((json) => {
-        console.log(json);
+
+    // Validar todos los campos
+    const fields = Array.from($form.querySelectorAll("input, textarea"));
+    const isValid = fields.every(field => validateField(field));
+
+    if (!isValid) {
+      return;
+    }
+
+    // Anti-spam check
+    const now = Date.now();
+    if (now - lastSubmitTime < SUBMIT_TIMEOUT) {
+      return;
+    }
+    lastSubmitTime = now;
+
+    try {
+      $loader.classList.remove("none");
+      
+      const formData = new FormData(e.target);
+      const response = await fetch("https://formsubmit.co/ajax/aragonjavier017@gmail.com", {
+        method: "POST",
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error(response.statusText || "Error al enviar el formulario");
+      }
+
+      const data = await response.json();
+      
+      if (data.success) {
         location.hash = "#gracias";
         $form.reset();
-      })
-      .catch((err) => {
-        console.log(err);
-        let message =
-          err.statusText || "Ocurrio un error al envair, Intenta de nuevo";
-        $response.querySelector(
-          "h3"
-        ).innerHTML = `Error ${err.statusText}: ${message}`;
-      })
-      .finally(() => {
-        $loader.classList.add("none");
-        setTimeout(() => {
+      } else {
+        throw new Error(data.message || "Error al procesar el formulario");
+      }
+
+    } catch (err) {
+      console.error(err);
+      $response.querySelector("h3").innerHTML = `
+        Error: ${err.message || "Ha ocurrido un error. Por favor, intenta de nuevo más tarde."}
+      `;
+      location.hash = "#error";
+    } finally {
+      $loader.classList.add("none");
+      
+      // Cerrar modal después de 5 segundos
+      setTimeout(() => {
+        if (location.hash === "#gracias" || location.hash === "#error") {
           location.hash = "#close";
-        }, 3000);
-      });
+        }
+      }, 5000);
+    }
   });
 })(document);

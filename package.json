@@ -12,23 +12,29 @@
     "@babel/core": "^7.13.10",
     "@babel/preset-env": "^7.13.10",
     "@babel/register": "^7.13.8",
-    "autoprefixer": "^10.2.5",
-    "cssnano": "^6.0.1",
-    "gulp": "^4.0.2",
+    "autoprefixer": "^10.4.21",
+    "cssnano": "^6.1.2",
+    "gulp": "^5.0.1",
     "gulp-babel": "^8.0.0",
-    "gulp-cache-bust": "^1.4.1",
+    "gulp-cache-bust": "^1.4.0",
     "gulp-concat": "^2.6.1",
-    "gulp-imagemin": "^8.0.0",
-    "gulp-postcss": "^9.0.0",
+    "gulp-htmlmin": "^5.0.1",
+    "gulp-imagemin": "^7.1.0",
+    "gulp-postcss": "^9.0.1",
     "gulp-pug": "^5.0.0",
     "gulp-purgecss": "^5.0.0",
+    "gulp-rename": "^2.1.0",
     "gulp-sass": "^5.1.0",
-    "gulp-terser": "^2.0.1",
-    "node-sass": "^9.0.0",
-    "postcss": "^8.2.7"
+    "gulp-terser": "^2.1.0",
+    "imagemin-gifsicle": "^7.0.0",
+    "imagemin-mozjpeg": "^9.0.0",
+    "imagemin-optipng": "^8.0.0",
+    "imagemin-webp": "^6.0.0",
+    "npmlog": "^7.0.1",
+    "postcss": "^8.2.7",
+    "sass": "^1.89.2"
   },
   "dependencies": {
-    "gulp-htmlmin": "^5.0.1",
-    "wow.js": "^1.2.2"
+    "aos": "^2.3.4"
   }
 }

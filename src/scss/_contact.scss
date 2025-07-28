@@ -1,6 +1,7 @@
-@import "./variables";
-@import './utilities';
-@import './header';
+@use 'variables' as *;
+@use 'utilities' as *;
+@use 'header' as *;
+
 .section--contact {
   background-color: $color-primary;
 }
@@ -60,5 +61,95 @@
   width: 1.5rem;
   height: 1.5rem;
   fill: $text-color;
+}
+
+.contact__form {
+  margin: 2rem auto;
+  max-width: 800px;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  background-color: rgba($color-primary, 0.05);
+
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: $text-color;
+    font-weight: 500;
+
+    .required {
+      color: $color-secundary;
+      margin-left: 0.25rem;
+    }
+  }
+
+  input,
+  textarea {
+    display: block;
+    width: 100%;
+    padding: 0.75rem;
+    font-family: $font-family;
+    font-size: 1rem;
+    color: $text-color;
+    background-color: rgba($color-primary, 0.05);
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+    transition: all 0.3s ease;
+
+    &:focus {
+      outline: none;
+      border-color: $color-secundary;
+      box-shadow: 0 0 0 2px rgba($color-secundary, 0.1);
+    }
+
+    &:invalid:not(:placeholder-shown) {
+      border-color: #dc3545;
+    }
+
+    &:valid:not(:placeholder-shown) {
+      border-color: #28a745;
+    }
+  }
+
+  input {
+    height: 3rem;
+  }
+
+  textarea {
+    min-height: 150px;
+    resize: vertical;
+  }
+
+  .error-message {
+    display: none;
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+  }
+
+  input:invalid:not(:placeholder-shown) ~ .error-message,
+  textarea:invalid:not(:placeholder-shown) ~ .error-message {
+    display: block;
+  }
+
+  .contact__form--loader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 1rem 0;
+
+    img {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+
+    span {
+      color: $text-color;
+    }
+  }
 }
 
